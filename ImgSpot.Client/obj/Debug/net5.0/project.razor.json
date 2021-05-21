@@ -15619,6 +15619,11 @@
   "RootNamespace": "ImgSpot.Client",
   "Documents": [
     {
+      "FilePath": "/home/ross/revature/ImgSpotMVC/ImgSpot.Client/Views/User/Index.cshtml",
+      "TargetPath": "Views\\User\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/ross/revature/ImgSpotMVC/ImgSpot.Client/Views/Home/Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
