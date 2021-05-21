@@ -38,3 +38,4 @@
 /home/ross/revature/ImgSpotMVC/ImgSpot.Client/obj/Debug/net5.0/ImgSpot.Client.pdb
 /home/ross/revature/ImgSpotMVC/ImgSpot.Client/obj/Debug/net5.0/ImgSpot.Client.genruntimeconfig.cache
 /home/ross/revature/ImgSpotMVC/ImgSpot.Client/obj/Debug/net5.0/ImgSpot.Client.csproj.CopyComplete
+/home/ross/revature/ImgSpotMVC/ImgSpot.Client/bin/Debug/net5.0/Newtonsoft.Json.dll

@@ -3,6 +3,21 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to ImgSpot</h1>
+    </br>
+    <h2 class="display-6 mt-3">Login</h2>
+
+    <form action="/login" method="post">
+        <label for="username" class=".col-form-label-sm py-2 mt-2">Username</label>
+        <input type="text" class="form-control-sm py-2 mt-2" id="username" name="login" value="">
+
+        <br>
+
+        <label for="password" class=".col-form-label-sm py-2">Password</label>
+        <input type="password" class="form-control-sm py-2" id="password" name="login" value="">
+
+        <br>
+
+        <input type="submit" class="btn btn-primary" id="submit" name="login" value="Submit">
+    </form>
 </div>
