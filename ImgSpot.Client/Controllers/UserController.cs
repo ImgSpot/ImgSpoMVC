@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ImgSpot.Client.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace ImgSpot.Client.Controllers
 {
@@ -20,7 +22,18 @@ namespace ImgSpot.Client.Controllers
 
         public IActionResult Index()
         {
-            return View("index");
+            var client = new HttpClient();
+            var response = client.GetAsync($"{_logger["Services:webapi"]}").GetAwaiter().GetResult();
+            List<string> result = null;
+
+            if(response.IsSuccessStatusCode)
+            {
+                result = JsonConvert.DeserializeObject<List<string>>(response.Content.ReadAsStringAsync().GetAwaiter);
+                ViewBag.Object = result;
+                return View("index");
+            }
+            return null;
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
