@@ -8,27 +8,29 @@ using Microsoft.Extensions.Logging;
 using ImgSpot.Client.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace ImgSpot.Client.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ILogger<UserController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public UserController(ILogger<UserController> logger)
+        public UserController(IConfiguration configuration)
         {
-            _logger = logger;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
         {
+            var subject = new ObjectModel();
             var client = new HttpClient();
-            var response = client.GetAsync($"{_logger["Services:webapi"]}").GetAwaiter().GetResult();
-            List<string> result = null;
+            var response = client.GetAsync($"{_configuration["Services:webapi"]}/people/1").GetAwaiter().GetResult();
+            ObjectModel result = null;
 
             if(response.IsSuccessStatusCode)
             {
-                result = JsonConvert.DeserializeObject<List<string>>(response.Content.ReadAsStringAsync().GetAwaiter);
+                result = JsonConvert.DeserializeObject<ObjectModel>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
                 ViewBag.Object = result;
                 return View("index");
             }

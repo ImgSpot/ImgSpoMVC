@@ -6,21 +6,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ImgSpot.Client.Models;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace ImgSpot.Client.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IConfiguration configuration)
         {
-            _logger = logger;
+            _configuration = configuration;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View("index");
+            ObjectModel subject = new ObjectModel();
+            var client = new HttpClient();
+            var response = client.GetAsync($"{_configuration["Services:webapi"]}/people/1/").GetAwaiter().GetResult();
+            ObjectModel result = null;
+
+            if(response.IsSuccessStatusCode)
+            {
+                result = await response.Content.ReadFromJsonAsync<ObjectModel>();
+                ViewBag.Object = result;
+                return View("index");
+            }
+            return BadRequest();
+            //return View("index");
         }
 
         public IActionResult Privacy()
