@@ -23,19 +23,7 @@ namespace ImgSpot.Client.Controllers
 
         public IActionResult Index()
         {
-            var subject = new ObjectModel();
-            var client = new HttpClient();
-            var response = client.GetAsync($"{_configuration["Services:webapi"]}/people/1").GetAwaiter().GetResult();
-            ObjectModel result = null;
-
-            if(response.IsSuccessStatusCode)
-            {
-                result = JsonConvert.DeserializeObject<ObjectModel>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-                ViewBag.Object = result;
-                return View("index");
-            }
-            return null;
-            
+            return View("index");   
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
