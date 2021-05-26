@@ -20,10 +20,20 @@ namespace ImgSpot.Client.Controllers
         {
             _configuration = configuration;
         }
-
         public IActionResult Index()
         {
-            return View("index");   
+            return View("index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(UserModel uploadedImage)
+        {
+            if (ModelState.IsValid)
+            {
+                return Json(uploadedImage);
+            }
+                return View("index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
