@@ -1,0 +1,60 @@
+name: ci-pipeline
+
+on: push
+
+jobs:
+  analyze:
+    needs:
+      - build
+      - test
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: dotnet tool install -g dotnet-sonarscanner
+      - run: dotnet sonarscanner begin -k:"ImgSpot_ImgSpoMVC" -o:"imgspot" -d:sonar.login=$SONAR_TOKEN -d:sonar.host.url="https://sonarcloud.io"
+      - run: dotnet build
+      - run: dotnet sonarscanner end -d:sonar.login=$SONAR_TOKEN
+
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: dotnet build
+
+  package:
+    env:
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+    needs:
+      - analyze
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker image build -f Dockerfile -t imgspot_mvc .
+      - run: docker image tag imgspot_mvc imgspot/imgspot_mvc
+      - run: echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
+      - run: docker push imgspot/imgspot_mvc
+      - run: docker logout
+
+  deploy:
+    needs:
+      - package
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: azure/login@v1
+        with: 
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: ImgSpotMVC
+          images: imgspot/imgspot_mvc
+
+  test:
+    runs-on: ubuntu-20.04
+    name: Generate Test Reports
+    steps:
+      - uses: actions/checkout@v2
+      - run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -p:CoverletOutput='./test_coverage/' -l trx -r './test_result/'
