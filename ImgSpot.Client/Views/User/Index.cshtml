@@ -6,26 +6,36 @@
   @Html.AntiForgeryToken()
 
   <legend>First Name</legend>
-  @Html.ValidationMessageFor(n => n.Fname)
-  <input type="text" class=".col-form-label-sm py-2 mt-2" id="fname" name="Fname" asp-for="Fname">
+  @Html.ValidationMessageFor(n => n.FirstName)
+  <input type="text" class=".col-form-label-sm py-2 mt-2" id="fname" name="FirstName" asp-for="FirstName">
   </br>
   <legend>Last Name</legend>
-  @Html.ValidationMessageFor(n => n.Lname)
-  <input type="text" class=".col-form-label-sm py-2 mt-2" id="lname" name="Lname" asp-for="Lname">
+  @Html.ValidationMessageFor(n => n.LastName)
+  <input type="text" class=".col-form-label-sm py-2 mt-2" id="lname" name="LastName" asp-for="LastName">
 
   </br>
 
-  @Html.ValidationMessageFor(f => f.File)
-  <input type="file" class=".col-form-label-sm py-2 mt-2" id="File" name="File" asp-for="File" accept="image/*" onchange="showPreview(event);">
+  <legend>Username</legend>
+  <input type="text" class=".col-form-label-sm py-2 mt-2" id="Username" name="Username" asp-for="Username" asp-for="SelectedUser">
+
+  </br>
+
+  @Html.ValidationMessageFor(f => f.Filename)
+  <input type="file" class=".col-form-label-sm py-2 mt-2" id="Filename" name="Filename" asp-for="Filename" asp-for="SelectedPicture" accept="image/*" onchange="showPreview(event);">
   <div class="preview rounded mx-auto d-block">
     <img src="http://placekitten.com/200/300" alt="Preview Image" id="imagePreview">
   </div>
 
   </br>
 
+  <legend>Description</legend>
+  <input type="text" class=".col-form-label-sm py-2 mt-2" id="Description" name="Description" asp-for="Description">
+
+  </br>
+
   <legend>Comment</legend>
-  @Html.ValidationMessageFor(c => c.Comment)
-  <input type="text" class=".col-form-label-sm py-2 mt-2" id="Comment" name="Comment" asp-for="Comment">
+  @Html.ValidationMessageFor(c => c.Body)
+  <input type="text" class=".col-form-label-sm py-2 mt-2" id="Body" name="Body" asp-for="Body" asp-format="SelectedComment">
 
   </br>
   </br>

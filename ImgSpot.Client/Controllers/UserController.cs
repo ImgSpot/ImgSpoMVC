@@ -9,6 +9,9 @@ using ImgSpot.Client.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
+using System.Web;
+using System.Text;
+using System.Net.Http.Headers;
 
 namespace ImgSpot.Client.Controllers
 {
@@ -27,13 +30,23 @@ namespace ImgSpot.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(UserModel uploadedImage)
+        public async Task<IActionResult> Index(UserModel uploadedImage)
         {
-            if (ModelState.IsValid)
+            var client = new HttpClient();
+            var queryString = HttpUtility.ParseQueryString(uploadedImage.Body);
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "dfda2680db5a40fbb5a778cff852de54");
+            var uri = "https://eastus.api.cognitive.microsoft.com/contentmoderator/moderate/v1.0/ProcessText/Screen?classify=True?" + queryString;
+            HttpResponseMessage response;
+
+            //Request Body
+            byte[] byteData = Encoding.UTF8.GetBytes("body");
+
+            using (var content = new ByteArrayContent(byteData))
             {
-                return Json(uploadedImage);
+                content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
+                response = await client.PostAsync(uri, content);
+                return Ok(response);
             }
-                return View("index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
