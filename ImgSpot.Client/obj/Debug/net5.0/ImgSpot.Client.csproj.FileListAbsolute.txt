@@ -40,3 +40,6 @@
 /home/ross/revature/ImgSpotMVC/ImgSpot.Client/obj/Debug/net5.0/ImgSpot.Client.csproj.CopyComplete
 /home/ross/revature/ImgSpotMVC/ImgSpot.Client/bin/Debug/net5.0/Newtonsoft.Json.dll
 /home/ross/revature/ImgSpotMVC/ImgSpot.Client/obj/Debug/net5.0/Razor/Views/User/Index.cshtml.g.cs
+/home/ross/revature/ImgSpotMVC/ImgSpot.Client/bin/Debug/net5.0/Microsoft.Azure.CognitiveServices.ContentModerator.dll
+/home/ross/revature/ImgSpotMVC/ImgSpot.Client/bin/Debug/net5.0/Microsoft.Rest.ClientRuntime.dll
+/home/ross/revature/ImgSpotMVC/ImgSpot.Client/bin/Debug/net5.0/Microsoft.Rest.ClientRuntime.Azure.dll

@@ -1,0 +1,17 @@
+Autocorrect typos, check for matching terms, PII, and classify.
+{
+  "OriginalText": "test",
+  "NormalizedText": "test",
+  "AutoCorrectedText": "test",
+  "Misrepresentation": null,
+  "Classification": null,
+  "Status": {
+    "Code": 3000,
+    "Description": "OK",
+    "Exception": null
+  },
+  "PII": null,
+  "Language": "eng",
+  "Terms": null,
+  "TrackingId": "22b75787-1181-43ca-9f08-0d090aba049b"
+}

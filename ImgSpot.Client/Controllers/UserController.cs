@@ -12,12 +12,49 @@ using Microsoft.Extensions.Configuration;
 using System.Web;
 using System.Text;
 using System.Net.Http.Headers;
+using Microsoft.Azure.CognitiveServices.ContentModerator;
+using System.IO;
 
 namespace ImgSpot.Client.Controllers
 {
     public class UserController : Controller
     {
         private readonly IConfiguration _configuration;
+        private static readonly string SubscriptionKey = "dfda2680db5a40fbb5a778cff852de54";
+        private static readonly string Endpoint = "https://eastus.api.cognitive.microsoft.com/contentmoderator/moderate/v1.0/ProcessText/Screen?classify=True";
+        public static readonly string ResultsFile = "res.txt";
+
+        public static ContentModeratorClient Authenticate(string key, string endpoint)
+        {
+            ContentModeratorClient client = new ContentModeratorClient(new ApiKeyServiceClientCredentials(key));
+            client.Endpoint = endpoint;
+
+            return client;
+        }
+
+        public static void ModerateText(ContentModeratorClient client, string inputText, string output)
+        {
+            string text = inputText;
+            text = text.Replace(Environment.NewLine, " ");
+            byte[] textBytes = Encoding.UTF8.GetBytes(text);
+            MemoryStream stream = new MemoryStream(textBytes);
+            Console.WriteLine("Screening {0}...", inputText);
+
+            using (StreamWriter outputWriter = new StreamWriter(output, false))
+            {
+                using (client)
+                {
+                    outputWriter.WriteLine("Autocorrect typos, check for matching terms, PII, and classify.");
+
+                    var screenResult = client.TextModeration.ScreenText("text/plain", stream, "eng", true, true, null, true);
+                    outputWriter.WriteLine(JsonConvert.SerializeObject(screenResult, Formatting.Indented));
+                }
+                outputWriter.Flush();
+                outputWriter.Close();
+            }
+            Console.WriteLine("Results written to {0}", output);
+            Console.WriteLine();
+        }
 
         public UserController(IConfiguration configuration)
         {
@@ -30,23 +67,11 @@ namespace ImgSpot.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(UserModel uploadedImage)
+        public IActionResult Index(UserModel uploadedImage)
         {
-            var client = new HttpClient();
-            var queryString = HttpUtility.ParseQueryString(uploadedImage.Body);
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "dfda2680db5a40fbb5a778cff852de54");
-            var uri = "https://eastus.api.cognitive.microsoft.com/contentmoderator/moderate/v1.0/ProcessText/Screen?classify=True?" + queryString;
-            HttpResponseMessage response;
-
-            //Request Body
-            byte[] byteData = Encoding.UTF8.GetBytes("body");
-
-            using (var content = new ByteArrayContent(byteData))
-            {
-                content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
-                response = await client.PostAsync(uri, content);
-                return Ok(response);
-            }
+            ContentModeratorClient clientText = Authenticate(SubscriptionKey, Endpoint);
+            ModerateText(clientText, uploadedImage.Body, ResultsFile);
+            return Json(uploadedImage);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
