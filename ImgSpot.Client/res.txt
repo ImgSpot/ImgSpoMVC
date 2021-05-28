@@ -1,0 +1,24 @@
+Autocorrect typos, check for matching terms, PII, and classify.
+{
+  "OriginalText": "this is crap test",
+  "NormalizedText": "  crap test",
+  "AutoCorrectedText": "this is crap test",
+  "Misrepresentation": null,
+  "Classification": null,
+  "Status": {
+    "Code": 3000,
+    "Description": "OK",
+    "Exception": null
+  },
+  "PII": null,
+  "Language": "eng",
+  "Terms": [
+    {
+      "Index": 2,
+      "OriginalIndex": 8,
+      "ListId": 0,
+      "Term": "crap"
+    }
+  ],
+  "TrackingId": "0223fc3d-f7e4-4d37-9b71-a3cf473a9022"
+}

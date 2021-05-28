@@ -1,3 +1,29 @@
-<h1>Api</h1>
+@model ImgSpot.Client.Models.UserModel
+<h1>Select A Picture You Would Like to Upload</h1>
+</br>
 
+ <form action="/user" method="post">
+  @Html.AntiForgeryToken()
 
+  @Html.ValidationMessageFor(u => u.SelectedUser)
+  <legend>Username</legend>
+  <input type="text" class=".col-form-label-sm py-2 mt-2" id="Username" name="Username"  asp-for="SelectedUser">
+
+  </br>
+
+  @Html.ValidationMessageFor(f => f.SelectedPicture)
+  <input type="file" class=".col-form-label-sm py-2 mt-2" id="SelectedPicture" name="SelectedPicture" asp-for="SelectedPicture" accept="image/*" onchange="showPreview(event);">
+  <div class="preview rounded mx-auto d-block">
+    <img src="http://placekitten.com/200/300" alt="Preview Image" id="imagePreview">
+  </div>
+
+  </br>
+
+  <legend>Comment</legend>
+  @Html.ValidationMessageFor(c => c.SelectedComment)
+  <input type="text" class=".col-form-label-sm py-2 mt-2" id="SelectedComment" name="SelectedComment" asp-for="SelectedComment">
+
+  </br>
+  </br>
+  <input type="submit" class="btn btn-primary" id="submit" value="Submit">
+</form>
