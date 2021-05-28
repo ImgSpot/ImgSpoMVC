@@ -14,6 +14,7 @@ using System.Text;
 using System.Net.Http.Headers;
 using Microsoft.Azure.CognitiveServices.ContentModerator;
 using System.IO;
+using System.Net.Http.Json;
 
 namespace ImgSpot.Client.Controllers
 {
@@ -67,11 +68,24 @@ namespace ImgSpot.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(UserModel uploadedImage)
+        public async Task<IActionResult> Index(UserModel uploadedImage)
         {
             ContentModeratorClient clientText = Authenticate(SubscriptionKey, Endpoint);
-            ModerateText(clientText, uploadedImage.Body, ResultsFile);
-            return Json(uploadedImage);
+            ModerateText(clientText, uploadedImage.SelectedComment, ResultsFile);
+            
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://imgspotapi.azurewebsites.net/");
+                var response = await client.PostAsJsonAsync("https://imgspotapi.azurewebsites.net/post", uploadedImage);
+
+                if(response.IsSuccessStatusCode)
+                {
+                    TempData["Picture"] = uploadedImage.SelectedUser;
+                    TempData["Comment"] = uploadedImage.SelectedComment;
+                    return RedirectToPage("/user");
+                }
+            }
+            return BadRequest();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

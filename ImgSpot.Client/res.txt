@@ -1,8 +1,8 @@
 Autocorrect typos, check for matching terms, PII, and classify.
 {
-  "OriginalText": "test",
-  "NormalizedText": "test",
-  "AutoCorrectedText": "test",
+  "OriginalText": "this is crap test",
+  "NormalizedText": "  crap test",
+  "AutoCorrectedText": "this is crap test",
   "Misrepresentation": null,
   "Classification": null,
   "Status": {
@@ -12,6 +12,13 @@ Autocorrect typos, check for matching terms, PII, and classify.
   },
   "PII": null,
   "Language": "eng",
-  "Terms": null,
-  "TrackingId": "22b75787-1181-43ca-9f08-0d090aba049b"
+  "Terms": [
+    {
+      "Index": 2,
+      "OriginalIndex": 8,
+      "ListId": 0,
+      "Term": "crap"
+    }
+  ],
+  "TrackingId": "0223fc3d-f7e4-4d37-9b71-a3cf473a9022"
 }

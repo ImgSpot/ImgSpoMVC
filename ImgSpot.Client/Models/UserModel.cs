@@ -10,23 +10,15 @@ namespace ImgSpot.Client.Models
   {
     [Required(ErrorMessage = "Please select a file")]
     [DataType(DataType.Upload)]
-    public List<string> Filename { get; set; }
+    public List<string> SelectedPicture { get; set; }
 
     [Required(ErrorMessage = "Please enter a comment")]
     [DataType(DataType.Text)]
-    public string Body { get; set; }
+    public string SelectedComment { get; set; }
 
-    [Required(ErrorMessage = "Please enter your first name")]
+    [Required(ErrorMessage = "Please enter your username")]
     [DataType(DataType.Text)]
-    public string FirstName { get; set; }
-
-    [Required(ErrorMessage = "Please enter your last name")]
-    [DataType(DataType.Text)]
-    public string LastName { get; set; }
-    public string Username { get; set; }
-    public int CountLikes { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
+    public string SelectedUser { get; set; }
 
     public IEnumerable<ValidationResult> ValidationResults(ValidationContext validationContext)
     {
