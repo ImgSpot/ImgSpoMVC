@@ -4600,19 +4600,19 @@
     ]
   },
   "packageFolders": {
-    "/home/ross/.nuget/packages/": {}
+    "/home/njdiemer/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ross/revature/ImgSpotMVC/ImgSpot.Client/ImgSpot.Client.csproj",
+      "projectUniqueName": "/home/njdiemer/revature/ImgSpoMVC/ImgSpot.Client/ImgSpot.Client.csproj",
       "projectName": "ImgSpot.Client",
-      "projectPath": "/home/ross/revature/ImgSpotMVC/ImgSpot.Client/ImgSpot.Client.csproj",
-      "packagesPath": "/home/ross/.nuget/packages/",
-      "outputPath": "/home/ross/revature/ImgSpotMVC/ImgSpot.Client/obj/",
+      "projectPath": "/home/njdiemer/revature/ImgSpoMVC/ImgSpot.Client/ImgSpot.Client.csproj",
+      "packagesPath": "/home/njdiemer/.nuget/packages/",
+      "outputPath": "/home/njdiemer/revature/ImgSpoMVC/ImgSpot.Client/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/ross/.nuget/NuGet/NuGet.Config"
+        "/home/njdiemer/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
