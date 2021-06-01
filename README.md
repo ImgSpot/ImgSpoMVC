@@ -5,8 +5,8 @@ Cognitive Services API, .NET/C#, Entity-Framework, Docker, HTML& CSS, Pipeline/Y
 XUnit, Sonarcloud
 
 Description:  ImgSpot is an application that provides a way for users to upload, share, and collect images with other 
-users. Users can upload and store personal image files with a unique title and description.  Users can also interact with other 
-shared pictures via comments and likes. ImgSpot ensure safe browsing with its integration to Azure Cognitive Services that 
+users. Users can upload and store personal image files with a unique title and description, and also interact with other 
+shared pictures via a comment section and tracking likes. ImgSpot ensure safe browsing with its integration to Azure Cognitive Services that 
 filters photos and comments to ensure safe for work browsing.  
 
 Web API: https://github.com/ImgSpot/ImgSpotWebAPI
