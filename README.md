@@ -1,9 +1,6 @@
 # ImgSpot
 
 ## Project Description
-Technologies: Angular, ASP.NET Core MVC, ASP.NET Web API, Angular (Typescript/Javascript), Azure, Azure 
-Cognitive Services API, .NET/C#, Entity-Framework, Docker, HTML& CSS, Pipeline/YAML, Postgres, mssql, 
-XUnit, Sonarcloud
 
 Description:  ImgSpot is an application that provides a way for users to upload, share, and collect images with other 
 users. Users can upload and store personal image files with a unique title and description, and also interact with other 
@@ -18,7 +15,13 @@ Web API: https://github.com/ImgSpot/ImgSpotWebAPI
 + .NET Core - EF + SQL
 + .NET Core - xUnit
 + ASP.NET Core - MVC
-+ ASP.NET Core Web API
++ ASP.NET Web API
++ Docker
++ Azure
++ Azure Cognitive Services API
++ Javascript
++ Pipeline/YAML
++ SonarCloud
 
 ## Features
 + Select an Image
@@ -27,7 +30,7 @@ Web API: https://github.com/ImgSpot/ImgSpotWebAPI
 + Post image to API
 
 ## Getting Started
-+ 'git clone https://github.com/rossclark-24/pizzabox-web.git'
++ 'git clone https://github.com/ImgSpot/ImgSpoMVC.git'
 + Install Entity Framework Design
 - 'dotnet add package Microsoft.EntityFrameworkCore.Design'
 + Install Entity Framework Core
@@ -35,15 +38,15 @@ Web API: https://github.com/ImgSpot/ImgSpotWebAPI
 
 ## Usage
 + Run locally or deploy using any method necessary
-+ From main folder run : 'dotnet run -p PizzaBox.Client' to run locally
++ From main folder run : 'dotnet run -p ImgSpot.Client' to run locally
 
 ## Contributors
-+ Ross Clark
++ Ross Clark, Nick Diemer, Chris Young
 
 ## License
 MIT License
 
-Copyright (c) 2021 Ross Clark
+Copyright (c) 2021 Ross Clark, Nick Diemer, Chris Young
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
